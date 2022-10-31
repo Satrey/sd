@@ -18,6 +18,7 @@
 import { defineComponent } from "vue";
 import { ref } from "vue";
 
+
 const columns = [
   {
     name: "number",
@@ -58,7 +59,6 @@ export default defineComponent({
     return {
       roadObjects: [],
       columns,
-
       fixed: ref(false),
 
       pagination: ref({
