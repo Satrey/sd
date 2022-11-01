@@ -16,20 +16,25 @@
               v-model="props.row.task_status"
               :color="props.value ? 'green' : 'red'"
               :disable="props.value"
-              @click="showAct = !showAct"
+             
             />
           </q-td>
         </template>
         <template v-slot:body-cell-job_doc_number="props">
           <q-td :props="props" class="text-green">
             <div>
-                <q-icon class="vertical-middle" style="font-size: 2em;"
+              <q-icon
+                style="font-size: 2em"
                 name="picture_as_pdf"
                 v-model="props.row.job_doc_number"
                 v-if="props.row.job_doc_number"
                 :disable="!props.value"
                 @click="showAct = !showAct"
-             />
+              >
+              <q-tooltip class="bg-indigo" :offset="[15, 15]" anchor="top right">
+                 {{props.row.job_doc_number}}  
+              </q-tooltip>
+              </q-icon>
             </div>
           </q-td>
         </template>
@@ -54,12 +59,17 @@
             </q-btn>
           </q-bar>
 
-          <q-card-section class="q-pt-none" style="width:1000px">
-            <br>
+          <q-card-section class="q-pt-none" style="width: 1000px">
+            <br />
             <div v-show="showAct">
               <div class="row text-center">
                 <div class="col">
-                    <img src="../assets/gerb_tyumen.png" alt="" width="50" height="50">
+                  <img
+                    src="../assets/gerb_tyumen.png"
+                    alt=""
+                    width="50"
+                    height="50"
+                  />
                 </div>
               </div>
               <div class="row text-center">
@@ -68,11 +78,11 @@
               <div class="row text-center">
                 <div class="col">«ТЮМЕНЬГОРТРАНС»</div>
               </div>
-              <br>
+              <br />
               <div class="row text-center">
                 <div class="col">Соблюдай правила техники безопасности!</div>
               </div>
-              <br><br>
+              <br /><br />
               <div class="row text-center">
                 <div class="col">НАРЯД-ЗАДАНИЕ № {{}}</div>
               </div>
@@ -82,23 +92,23 @@
                   светофорном объекте
                 </div>
               </div>
-              <br>
+              <br />
               <div class="row text-right">
                 <div class="col">
                   Форма Н-1 (заполняется старшим оператором)
                 </div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col">Дата, время поступления заявки:</div>
                 <div class="col">19.10.22г. <q-space /> 16-17</div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col">Адрес:</div>
                 <div class="col">ул. Пермякова, 71 (пеш)</div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col-4">
                   Замечание,<br />
@@ -106,43 +116,46 @@
                 </div>
                 <div class="col-8">не работает кнопка вызова на ТВП</div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col col-4">Передал:</div>
                 <div class="col col-8">УДД. т.51-02-76</div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col">Принял ст.оператор: М.М.Буторина</div>
                 <div class="col">Подпись</div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col">Наряд выдал: Р.Н.Сырятов</div>
                 <div class="col">Подпись</div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col">Наряд направлен для исполнения:</div>
                 <div class="col">С.С Сергеев</div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col text-right">
                   Форма Н-2 (заполняется производителем работ)
                 </div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col">Наряд получил: С.С Сергеев</div>
-                <div class="col">Подпись <hr></div>
+                <div class="col">
+                  Подпись
+                  <hr />
+                </div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col">Дата, время прибытия на объект:</div>
                 <div class="col">19.10.22г. 16-40</div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col col-4">
                   Обнаруженные <br />
@@ -150,27 +163,27 @@
                 </div>
                 <div class="col col-8"></div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col col-4">Выполнено:</div>
                 <div class="col col-8">замена кнопки на ТВП — 1шт</div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col">Дата, время устранения недостатков:</div>
                 <div class="col">17.10.22г. 16-52</div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col">Дата, время закрытия наряда:</div>
                 <div class="col">17.10.22г. 16-52</div>
               </div>
-              <br>
+              <br />
               <div class="row">
                 <div class="col">Производитель работ: С.С Сергеев</div>
                 <div class="col">Подпись</div>
               </div>
-              <br>
+              <br />
             </div>
           </q-card-section>
         </q-card>
@@ -179,7 +192,7 @@
   </q-page>
 </template>
   
-  <script>
+<script>
 import { defineComponent } from "vue";
 import { ref } from "vue";
 import { useTaskStore } from "../stores/taskstore";
@@ -282,6 +295,7 @@ export default defineComponent({
         rowsPerPage: 30,
       }),
       showAct: ref(false),
+      addTaskForm: ref(true),
     };
   },
 
@@ -301,7 +315,7 @@ tbody > tr:hover {
 }
 
 .pdf-list {
-    width: 800px;
+  width: 800px;
 }
 </style>
 
