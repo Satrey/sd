@@ -3,11 +3,11 @@
       <div class="q-pa-lg">
           <q-table
             title = 'Список сотрудников'
-            :rows="workers"
+            :rows="filteredWorkers"
             :columns="columns"
             row-key="name"
             :pagination="pagination"
-            :rows-per-page-options="[0]"
+            :rows-per-page-options="[30]"
           />
       </div>
     </q-page>
@@ -16,6 +16,9 @@
   <script>
   import { defineComponent } from 'vue'
   import { ref } from 'vue'
+  import { useWorkersStore } from "../stores/workersstore"
+
+  const workersStore = useWorkersStore()
   
   const columns = [
     { name: 'number', align: 'center', label: '№', field: 'id', sortable: true },
@@ -36,14 +39,19 @@
   
   export default defineComponent({
     name: 'WorkersPage',
-  
+    
+    // Фильтр search из MainLayout.vue для сортировки таблицы
+    props: {
+        search: String,
+    },
+
     data() {
       return {
-        workers: [],
+        workersStore,
         columns,
 
         pagination: ref({
-            rowsPerPage: 15
+            rowsPerPage: 30
         })
       }
     },
@@ -91,9 +99,16 @@
         })
       },
     },
+
+    computed: {
+        // Фильтрует таблицу светофорных объектов по полю name 
+        filteredWorkers() {
+            return this.workersStore.workersList.filter(elem => elem.last_name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1)    
+        },
+    },
   
     mounted() {
-      this.loadData()
+      workersStore.fetchWorkers()
     },
   
   

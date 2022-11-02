@@ -4,7 +4,7 @@
       <q-table
         title="Оперативный журнал"
         dense
-        :rows="taskStore.taskList"
+        :rows="filteredTasks"
         :columns="columns"
         row-key="id"
         :pagination="pagination"
@@ -286,6 +286,10 @@ export default defineComponent({
   components: {},
   name: "TasksPage",
 
+  props: {
+    search: String,
+  },
+
   data() {
     return {
       columns,
@@ -299,7 +303,10 @@ export default defineComponent({
   },
 
   computed: {
-
+    // Фильтрует таблицу светофорных объектов по полю name 
+    filteredTasks() {
+        return this.taskStore.taskList.filter(elem => elem.address.toLowerCase().indexOf(this.search.toLowerCase()) !== -1)     
+    }
   },
 
   mounted() {

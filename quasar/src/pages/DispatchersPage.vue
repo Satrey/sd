@@ -4,7 +4,7 @@
           <q-table class="pa-lg"
             title = 'Список действующих диспетчеров организации'
             dense
-            :rows="dispatchersStore.dispatchersList"
+            :rows="filteredDispatchers"
             :columns="columns"
             row-key="name"
             :pagination="pagination"
@@ -40,7 +40,12 @@
   
   export default defineComponent({
     name: 'DispatchersPage',
-  
+    
+    // Фильтр search из MainLayout.vue для сортировки таблицы
+    props: {
+        search: String,
+    },
+
     data() {
       return {
         dispatchersStore,
@@ -94,6 +99,13 @@
           console.log(console.error())
         })
       },
+    },
+
+    computed: {
+        // Фильтрует таблицу светофорных объектов по полю name 
+        filteredDispatchers() {
+            return this.dispatchersStore.dispatchersList.filter(elem => elem.last_name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1)    
+        },
     },
   
     mounted() {

@@ -4,7 +4,7 @@
       <q-table
         title="Список светофорных объектов"
         dense
-        :rows="this.filteredObjects"
+        :rows="filteredObjects"
         :columns="columns"
         row-key="id"
         :pagination="pagination"
@@ -28,30 +28,55 @@ const columns = [
     field: "id",
     sortable: true,
   },
-  {
+  // Поле для базы PostgreSQL
+  // {
+  //   name: "name",
+  //   required: true,
+  //   label: "Адрес дорожного объекта",
+  //   align: "left",
+  //   field: "address",
+  //   sortable: true,
+  // },
+  // Поле для API tgt
+  { 
     name: "name",
     required: true,
     label: "Адрес дорожного объекта",
     align: "left",
-    field: "address",
+    field: "name",
     sortable: true,
   },
-  { name: "lat", label: "Широта", field: "latitude", align: "left", sortable: true },
-  {
-    name: "lon",
-    label: "Долгота",
-    field: "longitude",
-    align: "left",
-    sortable: true,
-  },
+  // Поле для базы PostgreSQL
+  // { name: "lat", label: "Широта", field: "latitude", align: "left", sortable: true },
+  // Поле для API tgt
+  { name: "lat", label: "Широта", field: "lat", align: "left", sortable: true },
+  // Поле для базы PostgreSQL
+  // {
+  //   name: "lon",
+  //   label: "Долгота",
+  //   field: "longitude",
+  //   align: "left",
+  //   sortable: true,
+  // },
+  { name: "lon", label: "Широта", field: "lon", align: "left", sortable: true },
+  // Поле для базы PostgreSQL
+  // {
+  //   name: "regime_description",
+  //   label: "Описание",
+  //   field: "description",
+  //   align: "left",
+  //   sortable: true,
+  // },
+  // Поле для API tgt
   {
     name: "regime_description",
     label: "Описание",
-    field: "description",
+    field: "regime_description",
     align: "left",
     sortable: true,
   },
 ];
+
 // Подключаем хранилище светофорных объектов
 const roadObjectsStore = useObjectsStore()
 
@@ -59,10 +84,10 @@ const roadObjectsStore = useObjectsStore()
 export default defineComponent({
   name: "IndexPage",
 
+   // Фильтр search из MainLayout.vue для сортировки таблицы
   props: {
     search: String,
   },
-      // Фильтр search из MainLayout.vue для сортировки таблицы
 
 
   data() {
@@ -70,7 +95,6 @@ export default defineComponent({
       roadObjectsStore,
       columns,
       fixed: ref(false),
-      filter: '',
       pagination: ref({
         rowsPerPage: 30,
       }),
@@ -87,9 +111,10 @@ export default defineComponent({
 
 
   computed: {
+    
     // Фильтрует таблицу светофорных объектов по полю name 
     filteredObjects() {
-      return this.roadObjectsStore.roadObjectsList.filter(elem => elem.address.toLowerCase().indexOf(this.search.toLowerCase()) !== -1)     
+      return this.roadObjectsStore.roadObjectsList.filter(elem => elem.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1)    
     }
   },
 
@@ -106,12 +131,16 @@ export default defineComponent({
           console.log(console.error());
         });
     },
+
+    printData(arg) {
+      console.log(arg)
+    },  
   },
 
   mounted() {
     // Загружаем данные в хранилище светофорных объектов
     roadObjectsStore.fetchRoadObjects();
-    console.log(this.roadObjectsStore.roadObjectsList)
+    // console.log(this.roadObjectsStore.roadObjectsList)
   },
 });
 </script>
