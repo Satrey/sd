@@ -14,7 +14,13 @@
         <q-btn flat no-caps no-wrap class="q-ml-xs" v-if="$q.screen.gt.xs">
           <img id="org-logo" src="../assets/tt_logo1.png" width="30" />
           <q-toolbar-title id="org-title" shrink class="text-weight-bold">
-            <a id='site-link' href="http://tgt72.ru" target="_blank" rel="noopener noreferrer">Тюменьгортранс</a> 
+            <a
+              id="site-link"
+              href="http://tgt72.ru"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Тюменьгортранс</a
+            >
           </q-toolbar-title>
         </q-btn>
 
@@ -188,15 +194,9 @@
       </q-scroll-area>
     </q-drawer>
     <q-page-container>
-      <router-view />
+      <router-view :search="this.search" />
       <q-page-sticky position="bottom-right" :offset="[18, 18]">
-        <q-fab
-          color="primary"
-          glossy
-          icon="keyboard_arrow_up"
-          direction="up"
-          
-        >
+        <q-fab color="primary" glossy icon="keyboard_arrow_up" direction="up">
           <q-fab-action
             square
             external-label
@@ -245,18 +245,19 @@ import { ref } from "vue";
 export default {
   name: "MyLayout",
 
+
+
   setup() {
     const leftDrawerOpen = ref(false);
     const search = ref("");
 
     function toggleLeftDrawer() {
       leftDrawerOpen.value = !leftDrawerOpen.value;
-    }
+    };
 
     return {
       leftDrawerOpen,
       search,
-
       fabRight: ref(true),
 
       toggleLeftDrawer,
@@ -303,6 +304,8 @@ export default {
   },
 };
 </script>
+
+
 <style lang="css" scoped>
 #org-title {
   text-shadow: 2px 2px 6px rgba(22, 27, 24, 0.363);

@@ -288,7 +288,6 @@ export default defineComponent({
 
   data() {
     return {
-      roadObjects: [],
       columns,
       taskStore,
       pagination: ref({
@@ -299,7 +298,9 @@ export default defineComponent({
     };
   },
 
-  computed: {},
+  computed: {
+
+  },
 
   mounted() {
     taskStore.fetchTasks();

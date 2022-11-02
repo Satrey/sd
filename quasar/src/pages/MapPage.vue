@@ -13,6 +13,7 @@ import { Tile as TileLayer } from 'ol/layer';
 import { OSM } from 'ol/source';
 import {useGeographic} from 'ol/proj';
 import { ref } from 'vue'
+import VectorLayer from 'ol/layer/Vector';
 
 useGeographic();
 
@@ -23,13 +24,19 @@ export default {
             target: 'map',
             layers: [
                 new TileLayer({
+                    preload: Infinity,
                     source: new OSM(),
                     name: 'OSM'
-                })
+                    
+                }),
+                new VectorLayer({
+
+                }),
             ],
             view: new View({
                 center: [65.5272, 57.1522],
-                zoom: 15
+                zoom: 15,
+                rotation: Math.PI / 3,
             })
         });
  

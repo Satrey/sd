@@ -4,7 +4,7 @@
       <q-table
         title="Список светофорных объектов"
         dense
-        :rows="roadObjects.objects"
+        :rows="this.filteredObjects"
         :columns="columns"
         row-key="id"
         :pagination="pagination"
@@ -17,8 +17,9 @@
 <script>
 import { defineComponent } from "vue";
 import { ref } from "vue";
+import { useObjectsStore } from '../stores/objectsstore'
 
-
+// Задаем колонки которые будут в таблице, а так же их формат.
 const columns = [
   {
     name: "number",
@@ -32,39 +33,64 @@ const columns = [
     required: true,
     label: "Адрес дорожного объекта",
     align: "left",
-    field: "name",
+    field: "address",
     sortable: true,
   },
-  { name: "lat", label: "Широта", field: "lat", align: "left", sortable: true },
+  { name: "lat", label: "Широта", field: "latitude", align: "left", sortable: true },
   {
     name: "lon",
     label: "Долгота",
-    field: "lon",
+    field: "longitude",
     align: "left",
     sortable: true,
   },
   {
     name: "regime_description",
     label: "Описание",
-    field: "regime_description",
+    field: "description",
     align: "left",
     sortable: true,
   },
 ];
+// Подключаем хранилище светофорных объектов
+const roadObjectsStore = useObjectsStore()
+
 
 export default defineComponent({
   name: "IndexPage",
 
+  props: {
+    search: String,
+  },
+      // Фильтр search из MainLayout.vue для сортировки таблицы
+
+
   data() {
     return {
-      roadObjects: [],
+      roadObjectsStore,
       columns,
       fixed: ref(false),
-
+      filter: '',
       pagination: ref({
         rowsPerPage: 30,
       }),
     };
+  },
+
+  // watch: {
+  //   search() {
+  //     //console.log('Search', this.search)
+  //     this.filter = this.search
+  //     //console.log('Fiilter', this.filter)
+  //   }
+  // },
+
+
+  computed: {
+    // Фильтрует таблицу светофорных объектов по полю name 
+    filteredObjects() {
+      return this.roadObjectsStore.roadObjectsList.filter(elem => elem.address.toLowerCase().indexOf(this.search.toLowerCase()) !== -1)     
+    }
   },
 
   methods: {
@@ -83,7 +109,9 @@ export default defineComponent({
   },
 
   mounted() {
-    this.loadData();
+    // Загружаем данные в хранилище светофорных объектов
+    roadObjectsStore.fetchRoadObjects();
+    console.log(this.roadObjectsStore.roadObjectsList)
   },
 });
 </script>
