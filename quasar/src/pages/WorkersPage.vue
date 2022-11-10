@@ -1,8 +1,9 @@
 <template>
     <q-page class="">
-      <div class="q-pa-lg">
-          <q-table
+      <div class="">
+          <q-table class="q-pa-sm q-ma-sm"
             title = 'Список сотрудников'
+            dense
             :rows="filteredWorkers"
             :columns="columns"
             row-key="name"
@@ -33,6 +34,7 @@
     },
     { name: 'first_name', label: 'Имя', field: 'first_name', align: 'left', sortable: true},
     { name: 'middle_name', label: 'Отчество', field: 'middle_name', align: 'left', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
+    { name: 'job_title', label: 'Должность', field: 'job_title', align: 'left', sortable: true},
     { name: 'mobile_phone_number', label: 'Номер мобильного телефона', field: 'phone_number', align: 'left', sortable: true},
     { name: 'mobile_phone_number', label: 'Номер рабочего телефона', field: 'phone_number_worked', align: 'left', sortable: true},
   ]

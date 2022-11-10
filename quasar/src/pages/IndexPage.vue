@@ -1,7 +1,7 @@
 <template>
   <q-page>
-    <div class="q-pa-lg">
-      <q-table
+    <div class="">
+      <q-table class="q-pa-sm q-ma-sm"
         title="Список светофорных объектов"
         dense
         :rows="filteredObjects"
@@ -78,7 +78,7 @@ const columns = [
 ];
 
 // Подключаем хранилище светофорных объектов
-const roadObjectsStore = useObjectsStore()
+const roadObjectsStore = useObjectsStore();
 
 
 export default defineComponent({
@@ -114,8 +114,8 @@ export default defineComponent({
     
     // Фильтрует таблицу светофорных объектов по полю name 
     filteredObjects() {
-      return this.roadObjectsStore.roadObjectsList.filter(elem => elem.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1)    
-    }
+      return this.roadObjectsStore.roadObjectsList.filter(elem => elem.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1) 
+    },
   },
 
   methods: {
@@ -146,6 +146,10 @@ export default defineComponent({
 </script>
 
 <style lang="css">
+body {
+  box-sizing: border-box;
+}
+
 tbody > tr:hover {
   background-color: rgba(0, 60, 95, 0.438);
   color: rgb(255, 255, 255);

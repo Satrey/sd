@@ -1,14 +1,14 @@
 <template>
   <q-page class="">
-    <div class="q-pa-lg">
-      <q-table
+    <div class="">
+      <q-table class="q-pa-sm q-ma-sm"
         title="Оперативный журнал"
         dense
         :rows="filteredTasks"
         :columns="columns"
         row-key="id"
         :pagination="pagination"
-        :rows-per-page-options="[0]"
+        :rows-per-page-options="[15, 30, 50, 100]"
       >
         <template v-slot:body-cell-task_status="props">
           <q-td :props="props">
@@ -295,7 +295,7 @@ export default defineComponent({
       columns,
       taskStore,
       pagination: ref({
-        rowsPerPage: 30,
+        rowsPerPage: 15,
       }),
       showAct: ref(false),
       addTaskForm: ref(true),

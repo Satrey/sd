@@ -1,16 +1,18 @@
 <template>
-    <q-page class="">
-      <div class="q-pa-lg">
-          <q-table class="pa-lg"
+    <q-page>
+      <div class="">
+          <q-table class="q-pa-sm q-ma-sm"
             title = 'Список действующих диспетчеров организации'
             dense
             :rows="filteredDispatchers"
             :columns="columns"
             row-key="name"
             :pagination="pagination"
-            :rows-per-page-options="[0]"
+            :rows-per-page-options="[30]"
           />
       </div>
+      <q-space />
+      <div></div>
     </q-page>
   </template>
   
@@ -52,7 +54,7 @@
         columns,
 
         pagination: ref({
-            rowsPerPage: 30
+            rowsPerPage: 20
         })
       }
     },
@@ -117,6 +119,10 @@
   </script>
 
 <style>
+q-page {
+  box-sizing: border-box;
+}
+
 tbody > tr:hover {
   background-color: rgba(0, 60, 95, 0.438);
   color: rgb(255, 255, 255);

@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh lpR fFf" class="bg-grey-1">
+  <q-layout view="hHh LpR lFR" class="bg-grey-1">
     <q-header elevated class="bg-white text-grey-8 q-py-xs" height-hint="58">
       <q-toolbar>
         <q-btn
@@ -12,7 +12,7 @@
         />
 
         <q-btn flat no-caps no-wrap class="q-ml-xs" v-if="$q.screen.gt.xs">
-          <img id="org-logo" src="../assets/tt_logo1.png" width="30" />
+          <img id="org-logo" src="../assets/tt_logo1.png" width="25" />
           <q-toolbar-title id="org-title" shrink class="text-weight-bold">
             <a
               id="site-link"
@@ -82,7 +82,7 @@
             <q-tooltip>Notifications</q-tooltip>
           </q-btn>
           <q-btn round flat>
-            <q-avatar size="26px">
+            <q-avatar size="30px">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
             </q-avatar>
             <q-tooltip>Account</q-tooltip>
@@ -97,6 +97,7 @@
       bordered
       class="bg-grey-2"
       :width="240"
+      
     >
       <q-scroll-area class="fit">
         <q-list padding>
@@ -165,76 +166,11 @@
           </q-item>
 
           <q-separator class="q-mt-md q-mb-lg" />
-
-          <div class="q-px-md text-grey-9">
-            <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
-              <a
-                v-for="button in buttons1"
-                :key="button.text"
-                class="YL__drawer-footer-link"
-                href="javascript:void(0)"
-              >
-                {{ button.text }}
-              </a>
-            </div>
-          </div>
-          <div class="q-py-md q-px-md text-grey-9">
-            <div class="row items-center q-gutter-x-sm q-gutter-y-xs">
-              <a
-                v-for="button in buttons2"
-                :key="button.text"
-                class="YL__drawer-footer-link"
-                href="javascript:void(0)"
-              >
-                {{ button.text }}
-              </a>
-            </div>
-          </div>
         </q-list>
       </q-scroll-area>
     </q-drawer>
     <q-page-container>
       <router-view :search="this.search" />
-      <q-page-sticky position="bottom-right" :offset="[18, 18]">
-        <q-fab color="primary" glossy icon="keyboard_arrow_up" direction="up">
-          <q-fab-action
-            square
-            external-label
-            label-position="left"
-            color="primary"
-            @click="onClick"
-            icon="mail"
-            label="Email"
-          />
-          <q-fab-action
-            square
-            external-label
-            label-position="left"
-            color="secondary"
-            @click="onClick"
-            icon="alarm"
-            label="Alarm"
-          />
-          <q-fab-action
-            square
-            external-label
-            label-position="left"
-            color="orange"
-            @click="onClick"
-            icon="airplay"
-            label="Airplay"
-          />
-          <q-fab-action
-            square
-            external-label
-            label-position="left"
-            color="accent"
-            @click="onClick"
-            icon="room"
-            label="Map"
-          />
-        </q-fab>
-      </q-page-sticky>
     </q-page-container>
   </q-layout>
 </template>
@@ -244,7 +180,6 @@ import { ref } from "vue";
 
 export default {
   name: "MyLayout",
-
 
 
   setup() {
@@ -259,6 +194,7 @@ export default {
       leftDrawerOpen,
       search,
       fabRight: ref(true),
+      onClick: true,
 
       toggleLeftDrawer,
 
@@ -294,19 +230,29 @@ export default {
         { text: "Advertise" },
         { text: "Developers" },
       ],
-      buttons2: [
-        { text: "Terms" },
-        { text: "Privacy" },
-        { text: "Policy & Safety" },
-        { text: "Test new features" },
-      ],
     };
+  },
+
+  methods: {
+
+  },
+
+  computed: {
+
+  },
+
+  mounted() {
+    
   },
 };
 </script>
 
 
-<style lang="css" scoped>
+<style lang="css">
+body {
+  box-sizing: border-box;
+}
+
 #org-title {
   text-shadow: 2px 2px 6px rgba(22, 27, 24, 0.363);
   color: rgba(0, 60, 95, 0.849);
@@ -325,9 +271,11 @@ export default {
   &__toolbar-input-container
     min-width: 100px
     width: 55%
+    border-radius: 10
+
 
   &__toolbar-input-btn
-    border-radius: 0
+    border-radius: 10
     border-style: solid
     border-width: 1px 1px 1px 0
     border-color: rgba(0,0,0,.24)
