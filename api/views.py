@@ -2,6 +2,7 @@ from django.views.generic import ListView
 from rest_framework import generics
 from .serializers import TaskSerializer, ObjectSerializer, DispatcherSerializer, WorkerSerializer
 from .models import Task, Object, Dispatcher, Worker
+from rest_framework.permissions import IsAuthenticated
 
 
 class TaskListView(ListView):
@@ -20,6 +21,8 @@ class DetailTaskAPIView(generics.RetrieveAPIView):
 
 
 class ObjectListAPIView(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+
     queryset = Object.objects.all()
     serializer_class = ObjectSerializer
 

@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Task, Object, Worker, Dispatcher
 
 
+
 class TaskSerializer(serializers.ModelSerializer):
     address = serializers.SlugRelatedField(read_only=True, slug_field='address')
     dispatcher = serializers.SlugRelatedField(read_only=True, slug_field='last_name')
@@ -62,3 +63,5 @@ class DispatcherSerializer(serializers.ModelSerializer):
             'middle_name',
             'last_name',
         )
+        
+

@@ -13,5 +13,4 @@ urlpatterns = [
     path('workers/<int:pk>', DetailWorkerAPIView.as_view()),
     path('dispatchers/', DispatcherListAPIView.as_view()),
     path('dispatchers/<int:pk>', DetailDispatcherAPIView.as_view()),
-
 ]
